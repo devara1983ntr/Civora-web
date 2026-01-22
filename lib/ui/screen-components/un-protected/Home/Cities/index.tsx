@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useQuery, gql } from "@apollo/client";
 import { GET_COUNTRIES } from "@/lib/api/graphql/queries/Countries";
 import ListItem from "@/lib/ui/useable-components/list-item";
@@ -28,6 +28,19 @@ const Cities = () => {
     setToggle(false);
   };
   const t = useTranslations();
+
+  // Auto-select India when countries load
+  useEffect(() => {
+    if (data?.getCountries && !toggle) {
+      const india = data.getCountries.find((country: CountryItem) => 
+        country.name.toLowerCase() === 'india'
+      );
+      if (india) {
+        setToggle(true);
+        setCountryId(india._id);
+      }
+    }
+  }, [data, toggle]);
 
   return (
     <div>

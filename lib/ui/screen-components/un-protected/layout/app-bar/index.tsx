@@ -46,8 +46,7 @@ import {
 import { faChevronDown, faSignOutAlt } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-import { faGlobe } from "@fortawesome/free-solid-svg-icons";
-// Interface
+import ThemeToggle from "@/lib/ui/useable-components/theme-button";
 import { IAppBarProps } from "@/lib/utils/interfaces";
 import { ToastContext } from "@/lib/context/global/toast.context";
 // Methods
@@ -523,6 +522,16 @@ const AppTopbar = ({ handleModalToggle }: IAppBarProps) => {
                                 onClick={() => router.push("/profile/getHelp")}
                               >
                                 {item.label}
+                              </div>
+                            );
+                          },
+                        },
+                        {
+                          label: "Theme",
+                          template() {
+                            return (
+                              <div className="p-2">
+                                <ThemeToggle />
                               </div>
                             );
                           },

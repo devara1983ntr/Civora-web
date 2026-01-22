@@ -45,28 +45,28 @@ const AppFooter = () => {
       { label: t("Footer.aboutUs"), link: "/about", internal: true },
       { label: t("Footer.termsConditions"), link: "/terms", internal: true },
       { label: t("Footer.privacyPolicy"), link: "/privacy", internal: true },
-      { label: t("Footer.contact"), link: "https://ninjascode.com/", internal: false },
-      { label: t("Footer.developers"), link: "https://ninjascode.com/", internal: false },
+      { label: t("Footer.contact"), link: "#", internal: false },
+      { label: t("Footer.developers"), link: "#", internal: false },
     ],
   };
 
   const followUs = {
     title: t("Footer.followUs"),
     links: [
-      { label: t("Footer.blog"), link: "https://ninjascode.com/blog", internal: false },
+      { label: t("Footer.blog"), link: "#", internal: false },
       {
         label: t("Footer.instagram"),
-        link: "https://www.instagram.com/ninjascodeofficial?igsh=ajFoeGxud3FqYnd3",
+        link: "#",
         internal: false,
       },
       {
         label: t("Footer.facebook"),
-        link: "https://www.facebook.com/enatega/",
+        link: "#",
         internal: false,
       },
       {
         label: t("Footer.linkedIn"),
-        link: "https://www.linkedin.com/company/enatega/?originalSubdomain=pk",
+        link: "#",
         internal: false,
       },
     ],
