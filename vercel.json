@@ -5,20 +5,5 @@
       "src": "enatega-multivendor-web/package.json",
       "use": "@vercel/next"
     }
-  ],
-  "routes": [
-    {
-      "src": "/(.*)",
-      "dest": "/enatega-multivendor-web/$1"
-    }
-  ],
-  "functions": {
-    "enatega-multivendor-web/app/**/*.js": {
-      "runtime": "nodejs18.x"
-    }
-  },
-  "regions": ["iad1"],
-  "env": {
-    "NODE_ENV": "production"
-  }
+  ]
 }
