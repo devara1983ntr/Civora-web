@@ -1,14 +1,19 @@
 {
   "version": 2,
-  "rootDirectory": "enatega-multivendor-web",
   "builds": [
     {
-      "src": "package.json",
+      "src": "enatega-multivendor-web/package.json",
       "use": "@vercel/next"
     }
   ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "/enatega-multivendor-web/$1"
+    }
+  ],
   "functions": {
-    "app/**/*.js": {
+    "enatega-multivendor-web/app/**/*.js": {
       "runtime": "nodejs18.x"
     }
   },
