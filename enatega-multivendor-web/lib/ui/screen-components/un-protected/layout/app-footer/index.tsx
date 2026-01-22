@@ -14,8 +14,8 @@ const AppFooter = () => {
     pathname?.endsWith("/discovery") ||
     pathname?.endsWith("/store");
 
-  const partnerWithEnatega = {
-    title: t("Footer.partnerWithEnatega"),
+  const partnerWithCivora = {
+    title: t("Footer.partnerWithCivora"),
     links: [
       { label: t("Footer.home"), link: "/", internal: true },
       { label: t("Footer.forRiders"), link: "/rider", internal: true },
@@ -83,7 +83,7 @@ const AppFooter = () => {
             <AppLinks />
           </div>
           <div className="p-2">
-            <FooterLinks section={partnerWithEnatega} />
+            <FooterLinks section={partnerWithCivora} />
           </div>
           <div className="p-2">
             <FooterLinks section={products} />
@@ -94,6 +94,9 @@ const AppFooter = () => {
           <div className="p-2">
             <FooterLinks section={followUs} />
           </div>
+        </div>
+        <div className="mt-8 text-center text-gray-400 text-sm">
+          Created by Roshan
         </div>
       </div>
     </div>

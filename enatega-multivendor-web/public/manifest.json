@@ -1,8 +1,8 @@
 {
-  "name": "Enatega MultiVendor",
+  "name": "Civora MultiVendor",
   "id":"/",
-  "short_name": "Enatega",
-  "description": "A Progressive Web App built with Next.js",
+  "short_name": "Civora",
+  "description": "A Progressive Web App built with Next.js. Created by Roshan",
   "start_url": "/",
   "background_color": "#000",
   "theme_color": "#94e469",
