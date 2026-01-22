@@ -28,12 +28,12 @@ const AppFooter = () => {
     links: [
       {
         label: t("Footer.enategaRider"),
-        link: "https://play.google.com/store/apps/details?id=com.enatega.multirider&hl=en",
+        link: "https://play.google.com/store/apps/details?id=com.civora.multirider&hl=en",
         internal: false,
       },
       {
         label: t("Footer.enategaRestaurant"),
-        link: "https://play.google.com/store/apps/details?id=multivendor.enatega.restaurant&hl=en",
+        link: "https://play.google.com/store/apps/details?id=multivendor.civora.restaurant&hl=en",
         internal: false,
       },
     ],

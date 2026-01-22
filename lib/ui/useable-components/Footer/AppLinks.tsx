@@ -4,9 +4,9 @@ import { useRouter } from "next/navigation";
 import Image from "next/image";
 
 const PlayStoreLink =
-  "https://play.google.com/store/apps/details?id=com.enatega.multivendor&hl=en_IE";
+  "https://play.google.com/store/apps/details?id=com.civora.multivendor&hl=en_IE";
 const AppleStoreLink =
-  "https://apps.apple.com/pk/app/enatega-multivendor/id1526488093";
+  "https://apps.apple.com/pk/app/civora-multivendor/id1526488093";
 import Logo from "@/lib/utils/assets/svg/Logo";
 import { useTranslations } from "next-intl";
 

@@ -13,7 +13,6 @@ import StartingImage from '@/lib/ui/useable-components/RiderandRestaurantsInfos/
 
 // images
 import WorldClassCustomers from "@/public/assets/images/png/WorldClassCustomer.webp";
-import enategaApp from "@/public/assets/images/png/enategaApp.png";
 import growth from "@/public/assets/images/png/Growth.png";
 import getMoreOrders from "@/public/assets/images/png/GetMoreOrders.png";
 import deliverMoreCustomers from "@/public/assets/images/png/deliverToCustomer.png";
@@ -44,12 +43,6 @@ const RestInfo = () => {
   ];
 
   const sideCards = [
-    {
-      image: enategaApp,
-      heading: t("how_Civora_works"),
-      subHeading: t("how_Civora_works_desc"),
-      right: false
-    },
     {
       image: WorldClassCustomers,
       heading: t("world_class_customer_support"),
