@@ -2,8 +2,8 @@ import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 import Country from '../models/Country';
 import City from '../models/City';
-import Category from '../models/Category';
-import Restaurant from '../models/Restaurant';
+import Category, { ICategory } from '../models/Category';
+import Restaurant, { IRestaurant } from '../models/Restaurant';
 import Food from '../models/Food';
 import Configuration from '../models/Configuration';
 
@@ -69,7 +69,7 @@ const seedData = async () => {
       { title: 'Beverages', image: '/images/categories/beverages.jpg' }
     ];
 
-    const categoryDocs = [];
+    const categoryDocs: ICategory[] = [];
     for (const cat of categories) {
       const category = new Category(cat);
       await category.save();
@@ -170,7 +170,7 @@ const seedData = async () => {
       }
     ];
 
-    const restaurantDocs = [];
+    const restaurantDocs: IRestaurant[] = [];
     for (const rest of restaurants) {
       const restaurant = new Restaurant(rest);
       await restaurant.save();
