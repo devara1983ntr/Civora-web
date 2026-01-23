@@ -43,7 +43,11 @@ import {
   SearchSvg,
 } from "@/lib/utils/assets/svg";
 // import AnimatedLogo from "@/lib/assets/gif/logo.gif";
-import { faChevronDown, faSignOutAlt } from "@fortawesome/free-solid-svg-icons";
+import {
+  faChevronDown,
+  faSignOutAlt,
+  faGlobe,
+} from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import ThemeToggle from "@/lib/ui/useable-components/theme-button";
