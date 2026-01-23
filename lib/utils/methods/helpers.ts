@@ -2,7 +2,7 @@ import {
   PAYPAL_ALLOWED_CURRENCIES,
   STRIPE_ALLOWED_CURRENCIES,
 } from "../constants/currencies";
-import { OrderStatus } from "../interfaces";
+import { OrderStatus, IOpeningTime } from "../interfaces";
 import emailjs from "emailjs-com";
 import { onUseLocalStorage } from "./local-storage";
 
@@ -266,3 +266,26 @@ export const toFloatIfNeeded = (value: string | number) => {
   }
   return null;                                        // fallback
 }
+
+export const isWithinOpeningTime = (openingTimes: IOpeningTime[]): boolean => {
+  const now = new Date();
+  const currentDay = now
+    .toLocaleString("en-US", { weekday: "short" })
+    .toUpperCase(); // e.g., "MON", "TUE", ...
+  const currentHour = now.getHours();
+  const currentMinute = now.getMinutes();
+
+  const todayOpening = openingTimes.find((ot) => ot.day === currentDay);
+  if (!todayOpening) return false;
+
+  return todayOpening.times.some(({ startTime, endTime }) => {
+    const [startHour, startMinute] = startTime.map(Number);
+    const [endHour, endMinute] = endTime.map(Number);
+
+    const startTotal = startHour * 60 + startMinute;
+    const endTotal = endHour * 60 + endMinute;
+    const nowTotal = currentHour * 60 + currentMinute;
+
+    return nowTotal >= startTotal && nowTotal <= endTotal;
+  });
+};
