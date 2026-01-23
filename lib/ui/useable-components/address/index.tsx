@@ -17,7 +17,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { GoogleMap, Marker } from "@react-google-maps/api";
 import { AutoComplete, AutoCompleteSelectEvent } from "primereact/autocomplete";
-import { throttle } from "lodash";
+import throttle from 'lodash/throttle';
 import parse from "autosuggest-highlight/parse";
 
 // SVG
