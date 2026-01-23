@@ -264,15 +264,25 @@ export default function StoreDetailsScreen() {
 
     if (popularItems.length > 0) {
       const popularFoods: IFood[] = [];
+      const foodMap = new Map<string, IFood>();
 
-      for (const popular of popularItems) {
-        for (const category of allDealCategories) {
-          for (const subCat of category.subCategories) {
-            const match = subCat.foods.find((food) => food._id === popular.id);
-            if (match && !popularFoods.find((f) => f._id === match._id)) {
-              popularFoods.push(match);
+      // Populate map with first occurrence of each food
+      for (const category of allDealCategories) {
+        for (const subCat of category.subCategories) {
+          for (const food of subCat.foods) {
+            if (!foodMap.has(food._id)) {
+              foodMap.set(food._id, food);
             }
           }
+        }
+      }
+
+      const addedIds = new Set<string>();
+      for (const popular of popularItems) {
+        const match = foodMap.get(popular.id);
+        if (match && !addedIds.has(match._id)) {
+          popularFoods.push(match);
+          addedIds.add(match._id);
         }
       }
 
