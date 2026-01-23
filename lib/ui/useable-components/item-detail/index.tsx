@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 import useUser from "@/lib/hooks/useUser";
 
 // Interface
@@ -57,10 +57,19 @@ export default function FoodItemDetail(props: IFoodItemDetalComponentProps) {
   // State for clear cart modal
   const [showClearCartModal, setShowClearCartModal] = useState(false);
 
-  // Get the addon objects for the selected variation
+  // Memoize addons map for faster lookup - O(n)
+  const addonsMap = useMemo(() => {
+    return new Map(
+      addons
+        ?.filter((a) => a._id)
+        .map((addon) => [addon._id as string, addon])
+    );
+  }, [addons]);
+
+  // Get the addon objects for the selected variation - O(m) lookup instead of O(n*m)
   const variationAddons =
     selectedVariation?.addons
-      ?.map((addonId) => addons?.find((a) => a._id === addonId))
+      ?.map((addonId) => addonsMap.get(addonId))
       .filter(Boolean) || [];
 
   // Function to get options for a specific addon
