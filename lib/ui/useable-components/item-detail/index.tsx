@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import useUser from "@/lib/hooks/useUser";
 
 // Interface
@@ -6,6 +6,7 @@ import {
   IAddon,
   IFoodItemDetalComponentProps,
   Option,
+  IOption,
 } from "@/lib/utils/interfaces";
 
 // Components
@@ -57,18 +58,46 @@ export default function FoodItemDetail(props: IFoodItemDetalComponentProps) {
   // State for clear cart modal
   const [showClearCartModal, setShowClearCartModal] = useState(false);
 
+  // Optimized lookups using Maps
+  const addonsMap = useMemo(() => {
+    const map = new Map<string, IAddon>();
+    if (addons) {
+      for (const addon of addons) {
+        if (addon._id) {
+          map.set(addon._id, addon);
+        }
+      }
+    }
+    return map;
+  }, [addons]);
+
+  const optionsMap = useMemo(() => {
+    const map = new Map<string, IOption>();
+    if (options) {
+      for (const option of options) {
+        if (option._id) {
+          map.set(option._id, option);
+        }
+      }
+    }
+    return map;
+  }, [options]);
+
   // Get the addon objects for the selected variation
-  const variationAddons =
-    selectedVariation?.addons
-      ?.map((addonId) => addons?.find((a) => a._id === addonId))
-      .filter(Boolean) || [];
+  const variationAddons = useMemo(() => {
+    return (
+      selectedVariation?.addons
+        ?.map((addonId) => addonsMap.get(addonId))
+        .filter((addon): addon is IAddon => !!addon) || []
+    );
+  }, [selectedVariation, addonsMap]);
 
   // Function to get options for a specific addon
   const getAddonOptions = (addon: IAddon | undefined) => {
     return (
       addon?.options
-        ?.map((optionId) => options?.find((o) => o._id === optionId))
-        .filter(Boolean) || []
+        ?.map((optionId) => optionsMap.get(optionId as unknown as string))
+        .filter((option): option is IOption => !!option) || []
     );
   };
 
