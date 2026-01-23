@@ -153,17 +153,6 @@ export default function OrderCheckoutScreen() {
 
   // Load saved coupon from localStorage when page loads
 
-  // ============================================================================
-  // FIX: Clear coupon when restaurant changes
-  // ============================================================================
-
-  // ADD THIS NEW CONSTANT with your other coupon constants (around line 76)
-
-  // ============================================================================
-  // STEP 1: Update couponCompleted to save restaurant ID
-  // ============================================================================
-
-  // Find the couponCompleted function (around line 420) and UPDATE it:
 
   function couponCompleted({ coupon }: { coupon: ICoupon }) {
     if (!coupon.success) {
@@ -203,12 +192,6 @@ export default function OrderCheckoutScreen() {
     }
   }
 
-  // ============================================================================
-  // STEP 2: Add useEffect to check restaurant change
-  // ============================================================================
-
-  // ADD THIS NEW useEffect after your existing coupon useEffects (around line 185)
-
   // Clear coupon when restaurant changes
   useEffect(() => {
     // Only run this check if restaurantId has actually loaded
@@ -237,12 +220,6 @@ export default function OrderCheckoutScreen() {
       }
     }
   }, [restaurantId, isCouponApplied, showToast, t]);
-
-  // ============================================================================
-  // STEP 3: Update the load coupon useEffect to validate restaurant
-  // ============================================================================
-
-  // REPLACE your existing "Load saved coupon" useEffect (around line 160) with this:
 
   // Load saved coupon from localStorage when page loads
   useEffect(() => {
