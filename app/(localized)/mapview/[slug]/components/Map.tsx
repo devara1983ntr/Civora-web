@@ -54,11 +54,9 @@ const Map: FC<MapProps> = ({ apiKey, data, center }) => {
   ) : loadError ? (
     <DisplayError />
   ) : (
-    <>
-    {/* Light mode */}
     <GoogleMap
-      mapContainerClassName="block dark:hidden"
-      zoom={12} 
+      mapContainerClassName="w-full h-screen"
+      zoom={12}
       center={center || defaultCenter}
       mapContainerStyle={{ width: "100%", height: "100vh" }}
       options={{
@@ -68,15 +66,18 @@ const Map: FC<MapProps> = ({ apiKey, data, center }) => {
         fullscreenControl: false,
         cameraControl: false,
         gestureHandling: "auto",
+        styles: theme === "dark" ? darkMapStyle : undefined,
       }}
       onLoad={(map) => {
-        mapRef.current = map
-      }} 
+        mapRef.current = map;
+      }}
     >
       {data.map((restaurant, index) => {
         const { coordinates } = restaurant.location;
         if (!coordinates || coordinates.length !== 2) {
-          console.warn(`Invalid coordinates for restaurant: ${restaurant.name}`);
+          console.warn(
+            `Invalid coordinates for restaurant: ${restaurant.name}`
+          );
           return null;
         }
 
@@ -100,67 +101,10 @@ const Map: FC<MapProps> = ({ apiKey, data, center }) => {
             }}
             title={restaurant.name}
             onClick={() => router.push(getRedirectUrl(restaurant))}
-
-          >
-          </Marker>
+          ></Marker>
         );
       })}
     </GoogleMap>
-
-    {/* Dark mode */}
-    <GoogleMap
-      mapContainerClassName="hidden dark:block"
-      zoom={12} 
-      center={center || defaultCenter}
-      mapContainerStyle={{ width: "100%", height: "100vh" }}
-      options={{
-        zoomControl: false, // Disable default zoom controls
-        mapTypeControl: false,
-        streetViewControl: false,
-        fullscreenControl: false,
-        cameraControl: false,
-        gestureHandling: "auto",
-        styles: theme === "dark" ? darkMapStyle : null,
-        disableDefaultUI: true,
-      }}
-      onLoad={(map) => {
-        mapRef.current = map
-      }} 
-    >
-      {data.map((restaurant, index) => {
-        const { coordinates } = restaurant.location;
-        if (!coordinates || coordinates.length !== 2) {
-          console.warn(`Invalid coordinates for restaurant: ${restaurant.name}`);
-          return null;
-        }
-
-        return (
-          <Marker
-            key={index}
-            position={{
-              lat: Number(coordinates[1]),
-              lng: Number(coordinates[0]),
-            }}
-            icon={{
-              url: restaurant.image,
-              scaledSize: new window.google.maps.Size(50, 50),
-            }}
-            label={{
-              text: restaurant.name,
-              color: "#333",
-              fontSize: "12px",
-              fontWeight: "bold",
-              className: "map-view-marker-label",
-            }}
-            title={restaurant.name}
-            onClick={() => router.push(getRedirectUrl(restaurant))}
-
-          >
-          </Marker>
-        );
-      })}
-    </GoogleMap>
-    </>
   );
 };
 
