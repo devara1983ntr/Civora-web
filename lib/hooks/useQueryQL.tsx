@@ -6,7 +6,7 @@ import {
   useQuery,
 } from "@apollo/client";
 import { WatchQueryFetchPolicy } from "@apollo/client/core/watchQueryOptions";
-import { debounce } from "lodash";
+import debounce from 'lodash/debounce';
 import { useCallback, useState } from "react";
 import { retryQuery } from "@/lib/utils/methods";
 
