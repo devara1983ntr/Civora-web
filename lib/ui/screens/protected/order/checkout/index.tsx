@@ -152,19 +152,6 @@ export default function OrderCheckoutScreen() {
   }, [restaurantData, restaurantFromLocalStorage]);
 
   // Load saved coupon from localStorage when page loads
-
-  // ============================================================================
-  // FIX: Clear coupon when restaurant changes
-  // ============================================================================
-
-  // ADD THIS NEW CONSTANT with your other coupon constants (around line 76)
-
-  // ============================================================================
-  // STEP 1: Update couponCompleted to save restaurant ID
-  // ============================================================================
-
-  // Find the couponCompleted function (around line 420) and UPDATE it:
-
   function couponCompleted({ coupon }: { coupon: ICoupon }) {
     if (!coupon.success) {
       showToast({
@@ -203,12 +190,6 @@ export default function OrderCheckoutScreen() {
     }
   }
 
-  // ============================================================================
-  // STEP 2: Add useEffect to check restaurant change
-  // ============================================================================
-
-  // ADD THIS NEW useEffect after your existing coupon useEffects (around line 185)
-
   // Clear coupon when restaurant changes
   useEffect(() => {
     // Only run this check if restaurantId has actually loaded
@@ -237,12 +218,6 @@ export default function OrderCheckoutScreen() {
       }
     }
   }, [restaurantId, isCouponApplied, showToast, t]);
-
-  // ============================================================================
-  // STEP 3: Update the load coupon useEffect to validate restaurant
-  // ============================================================================
-
-  // REPLACE your existing "Load saved coupon" useEffect (around line 160) with this:
 
   // Load saved coupon from localStorage when page loads
   useEffect(() => {
@@ -296,33 +271,6 @@ export default function OrderCheckoutScreen() {
       onUseLocalStorage("delete", COUPON_APPLIED_STORAGE_KEY);
     }
   }, [cart.length, isCouponApplied]);
-
-  // Clear coupon when restaurant changes
-  useEffect(() => {
-    if (typeof window !== "undefined" && isCouponApplied && restaurantId) {
-      const savedRestaurantId = onUseLocalStorage("get", COUPON_RESTAURANT_KEY);
-
-      if (savedRestaurantId && savedRestaurantId !== restaurantId) {
-        // Restaurant changed - clear coupon
-        setIsCouponApplied(false);
-        setCoupon({} as ICouponData);
-        setCouponText("");
-
-        onUseLocalStorage("delete", COUPON_STORAGE_KEY);
-        onUseLocalStorage("delete", COUPON_TEXT_STORAGE_KEY);
-        onUseLocalStorage("delete", COUPON_APPLIED_STORAGE_KEY);
-        onUseLocalStorage("delete", COUPON_RESTAURANT_KEY);
-
-        showToast({
-          type: "info",
-          title: t("coupon_removed_title"),
-          message: t("coupon_removed_different_restaurant"),
-        });
-
-        console.log("Coupon cleared: restaurant changed");
-      }
-    }
-  }, [restaurantId, isCouponApplied]);
   // Use local restaurant data if GraphQL data is not available
   const finalRestaurantData = restaurantData || localRestaurantData;
 
@@ -427,16 +375,6 @@ export default function OrderCheckoutScreen() {
       setTaxValue(finalRestaurantData.restaurant.tax);
     }
   }, [finalRestaurantData, taxValue]);
-
-  useEffect(() => {
-    const savedCoupon = localStorage.getItem("appliedCoupon");
-
-    if (savedCoupon) {
-      const parsed = JSON.parse(savedCoupon);
-      setCoupon(parsed);
-      setIsCouponApplied(true); // ← VERY IMPORTANT
-    }
-  }, []);
 
   const onInitDirectionCacheSet = () => {
     try {
